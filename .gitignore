@@ -1,0 +1,21 @@
+# 🔑 Secrets
+.env
+
+# 📦 Dependencies
+node_modules/
+
+# 📝 Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 🖥️ System/Editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ⚡ Build / temp files (if you generate any in the future)
+dist/
+build/
