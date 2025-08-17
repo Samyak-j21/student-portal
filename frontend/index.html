@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Portal | Dayananda Sagar Institutions</title>
+  <link rel="stylesheet" href="index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <div class="logo">
+        <a href="index.html">DSI Portal</a>
+      </div>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#" class="nav-button" id="login-nav">Login</a>
+        <a href="dashboard.html" class="nav-button" id="dashboard-nav" style="display:none;">Dashboard</a>
+        <a href="#" class="nav-button" id="logout-nav" style="display:none;">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home-section">
+      <div class="container hero">
+        <div class="hero-content">
+          <h1>The official student portal of Dayananda Sagar Institutions.</h1>
+          <p>Access model papers, notes, lectures, and an AI-powered chatbot—all for free.</p>
+          <button id="get-started-button" class="cta-button">Get Started</button>
+        </div>
+        <div class="auth-card" id="auth-card">
+          <div class="auth-header">
+            <button class="auth-tab active" id="login-tab">Login</button>
+            <button class="auth-tab" id="signup-tab">Sign Up</button>
+          </div>
+          <form id="login-form" class="auth-form active">
+            <h3>Login to your account</h3>
+            <input type="email" id="login-email" placeholder="Email" required>
+            <input type="password" id="login-password" placeholder="Password" required autocomplete="current-password">
+            <button type="submit" class="submit-button">Login</button>
+          </form>
+          <form id="signup-form" class="auth-form">
+            <h3>Create your account</h3>
+            <input type="email" id="signup-email" placeholder="Email" required>
+            <input type="password" id="signup-password" placeholder="Password" required autocomplete="new-password">
+            <button type="submit" class="submit-button">Sign Up</button>
+          </form>
+          <p class="auth-message"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <h2>Key Features</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3><i class="fas fa-file-alt"></i> Model Papers & Notes</h3>
+            <p>A comprehensive collection of previous year question papers and modules.</p>
+          </div>
+          <div class="feature-card">
+            <h3><i class="fas fa-robot"></i> AI Chatbot</h3>
+            <p>An AI assistant to answer your academic queries instantly.</p>
+          </div>
+          <div class="feature-card">
+            <h3><i class="fas fa-search"></i> Smart Search</h3>
+            <p>Find what you need across all documents with powerful search capabilities.</p>
+          </div>
+          <div class="feature-card">
+            <h3><i class="fas fa-book-open"></i> PDF Summarizer</h3>
+            <p>Quickly get a summary of any academic PDF you upload.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Student Portal | Made by Samyak Jain</p>
+    </div>
+  </footer>
+
+  <!-- Custom Message Box for alerts/confirmations -->
+  <div id="messageBox" style="display: none;"
+    class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full text-center">
+      <p id="messageText" class="text-lg text-gray-800 mb-4"></p>
+      <button id="closeMessage"
+        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300">OK</button>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>

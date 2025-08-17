@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | DSI Portal</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</head>
+
+<body class="dashboard-body">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <a href="index.html">DSI Portal</a>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="#" id="navDownloads" class="nav-item active"><i class="fas fa-download"></i> Downloads</a></li>
+        <li><a href="#" id="navChatbot" class="nav-item"><i class="fas fa-robot"></i> AI Chatbot</a></li>
+        <li><a href="#" id="navSummarizer" class="nav-item"><i class="fas fa-file-alt"></i> PDF Summarizer</a></li>
+        <!-- Admin Section link - visibility controlled by JS -->
+        <li id="adminNavListItem" style="display:none;"><a href="#" id="navAdmin" class="nav-item"><i
+              class="fas fa-user-shield"></i> Admin Section</a></li>
+        <li class="logout-item"><a href="#" id="logout-nav" class="nav-item logout-button"><i
+              class="fas fa-sign-out-alt"></i> Logout</a></li>
+      </ul>
+    </nav>
+    <div class="user-info">
+      <p>Welcome, <span id="user-email">Guest</span>!</p>
+      <p class="user-id-display">User ID: <span id="displayUserId">Loading...</span></p>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <header class="main-header">
+      <h2 id="pageTitle">Dashboard</h2>
+    </header>
+
+    <!-- Downloads Section -->
+    <section id="downloadsSection" class="content-section active">
+      <div class="container">
+        <h3>Available Files for Download</h3>
+        <div class="search-bar-container">
+          <input type="text" id="downloadSearch" placeholder="Search files by title, category, or date..."
+            class="search-input">
+          <button id="searchDownloadsBtn" class="search-button"><i class="fas fa-search"></i> Search</button>
+        </div>
+        <div id="available-files-list" class="file-list">
+          <!-- Files will be loaded here dynamically -->
+          <p>Loading files...</p>
+        </div>
+        <p id="noDownloadsMessage" class="no-results-message" style="display:none;">No files found matching your search.
+        </p>
+      </div>
+    </section>
+
+    <!-- AI Chatbot Section -->
+    <section id="chatbotSection" class="content-section">
+      <div class="container">
+        <h3>AI Chatbot</h3>
+        <div class="chat-window">
+          <p class="bot-message"><strong>Bot:</strong> Hello! How can I help you today?</p>
+        </div>
+        <div class="chat-input-area">
+          <input type="text" placeholder="Ask me anything..." id="chat-input">
+          <button id="send-chat-button">Send</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PDF Summarizer Section -->
+    <section id="summarizerSection" class="content-section">
+      <div class="container">
+        <h3>PDF Summarizer</h3>
+        <div class="pdf-uploader">
+          <label for="pdf-file-input">Choose PDF to Summarize</label>
+          <input type="file" id="pdf-file-input" accept=".pdf" title="Select a PDF file to upload for summarization">
+          <button id="summarize-pdf-button">Summarize</button>
+        </div>
+        <div id="pdf-summary-output" class="summary-output">
+          <p>Summary will appear here...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admin Portal Section -->
+    <section id="adminSection" class="content-section" style="display:none;">
+      <div class="container">
+        <h3>Admin Upload Portal</h3>
+        <p class="admin-description">Upload new PDFs to the website's cloud with systematic details.</p>
+        <div class="admin-uploader">
+          <label for="admin-pdf-title">File Title (e.g., Module 1 - 3rd Sem Physics)</label>
+          <input type="text" id="admin-pdf-title" placeholder="Enter file title" required>
+
+          <label for="admin-pdf-category">Category (e.g., Module, Syllabus, Notes)</label>
+          <input type="text" id="admin-pdf-category" placeholder="Enter file category" required>
+
+          <label for="admin-pdf-file">Choose PDF to Upload</label>
+          <input type="file" id="admin-pdf-file" accept=".pdf" required>
+
+          <button id="admin-upload-button">Upload PDF</button>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar"></div>
+        </div>
+        <p id="upload-message" class="upload-message"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Custom Message Box for alerts/confirmations -->
+  <div id="messageBox" style="display: none;"
+    class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full text-center">
+      <p id="messageText" class="text-lg text-gray-800 mb-4"></p>
+      <button id="closeMessage"
+        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300">OK</button>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+
+</html>

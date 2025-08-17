@@ -1,0 +1,481 @@
+/* Dashboard-specific styles */
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --background-color: #f8f9fa;
+  --card-background: #ffffff;
+  --text-color: #343a40;
+  --heading-color: #212529;
+  --border-color: #dee2e6;
+  --success-color: #28a745;
+  --error-color: #dc3545;
+}
+
+body.dashboard-body {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: 250px;
+  background-color: #2c3e50;
+  /* Darker shade for sidebar */
+  color: white;
+  padding: 2rem 1.5rem;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar .logo {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.sidebar .logo a {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-nav li {
+  margin-bottom: 1rem;
+}
+
+.sidebar-nav .nav-item {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  color: #ecf0f1;
+  /* Light gray for links */
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-nav .nav-item i {
+  margin-right: 10px;
+  font-size: 1.1rem;
+}
+
+.sidebar-nav .nav-item:hover {
+  background-color: #34495e;
+  /* Slightly lighter dark for hover */
+  color: white;
+}
+
+.sidebar-nav .nav-item.active {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+}
+
+.sidebar-nav .logout-item {
+  margin-top: 3rem;
+  /* Push logout to bottom */
+}
+
+.sidebar-nav .logout-button {
+  background-color: #e74c3c;
+  /* Red for logout */
+}
+
+.sidebar-nav .logout-button:hover {
+  background-color: #c0392b;
+  /* Darker red on hover */
+}
+
+.user-info {
+  font-size: 0.9rem;
+  color: #bdc3c7;
+  /* Lighter gray for user info */
+  text-align: center;
+  padding-top: 1rem;
+  border-top: 1px solid #34495e;
+}
+
+.user-info p {
+  margin-bottom: 0.5rem;
+}
+
+.user-id-display {
+  word-break: break-all;
+  /* Ensure long IDs wrap */
+}
+
+
+/* Main Content Area */
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: var(--background-color);
+}
+
+.main-header {
+  background-color: var(--card-background);
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-header h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--heading-color);
+  text-align: left;
+  /* Override center alignment from index.css */
+}
+
+/* Content Sections */
+.content-section {
+  background-color: var(--card-background);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+  display: none;
+  /* Hidden by default, controlled by JS */
+}
+
+.content-section.active {
+  display: block;
+}
+
+.content-section h3 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.75rem;
+}
+
+/* Specific Widget Styles (retained from your original dashboard.css) */
+.dashboard-grid {
+  /* This class might not be directly used with new layout, but keeping for reference */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  align-items: start;
+}
+
+.widget {
+  /* This class might not be directly used with new layout, but keeping for reference */
+  background-color: var(--card-background);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.widget h3 {
+  /* This class might not be directly used with new layout, but keeping for reference */
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+/* File List Styling (updated for downloads section) */
+.file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 400px;
+  /* Adjust this value as needed */
+  overflow-y: auto;
+  padding-right: 10px;
+  /* Add some space for the scrollbar */
+}
+
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 10px 15px;
+}
+
+.file-item p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.file-item a.download-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.file-item a.download-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Chatbot Styling */
+.chat-window {
+  flex-grow: 1;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #fefefe;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 300px;
+  /* Ensure chat window has a minimum height */
+}
+
+.chat-input-area {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.chat-input-area input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+}
+
+.chat-input-area button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.chat-input-area button:hover {
+  background-color: #0056b3;
+}
+
+.bot-message,
+.user-message {
+  padding: 8px 12px;
+  border-radius: 8px;
+  max-width: 80%;
+}
+
+.bot-message {
+  background-color: #e0e0e0;
+  align-self: flex-start;
+}
+
+.user-message {
+  background-color: var(--primary-color);
+  color: white;
+  align-self: flex-end;
+}
+
+
+/* PDF Summarizer & Admin Upload Styling */
+.pdf-uploader,
+.admin-uploader {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  /* Increased gap for better spacing */
+}
+
+.pdf-uploader label,
+.admin-uploader label {
+  font-weight: 500;
+  color: var(--heading-color);
+  margin-top: 10px;
+}
+
+.pdf-uploader input[type="file"],
+.admin-uploader input[type="file"],
+.admin-uploader input[type="text"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+}
+
+.pdf-uploader button,
+#admin-upload-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pdf-uploader button:hover,
+#admin-upload-button:hover {
+  background-color: #0056b3;
+}
+
+#pdf-summary-output,
+#upload-message {
+  padding: 1rem;
+  background-color: #fefefe;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.summary-output,
+.upload-message {
+  min-height: 80px;
+  /* Ensure space for output */
+}
+
+/* Progress Bar Styling */
+.progress-bar-container {
+  width: 100%;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  margin-top: 15px;
+  overflow: hidden;
+  display: none;
+  /* Initially hidden */
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background-color: #28a745;
+  /* Green color */
+  border-radius: 5px;
+  transition: width 0.3s ease;
+}
+
+/* Downloads Search Bar */
+.search-bar-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.search-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+.no-results-message {
+  text-align: center;
+  color: var(--secondary-color);
+  margin-top: 20px;
+}
+
+/* Custom Message Box Styling (for dashboard) */
+#messageBox {
+  z-index: 9999;
+  /* Ensure it's on top of everything */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  body.dashboard-body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .sidebar-nav li {
+    margin-bottom: 0;
+  }
+
+  .sidebar .logo,
+  .user-info {
+    display: none;
+    /* Hide logo and user info on small screens for brevity */
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .main-header {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .main-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .content-section {
+    padding: 1.5rem;
+  }
+
+  .content-section h3 {
+    font-size: 1.5rem;
+  }
+
+  .search-bar-container {
+    flex-direction: column;
+  }
+
+  .chat-input-area,
+  .pdf-uploader,
+  .admin-uploader {
+    flex-direction: column;
+  }
+}
