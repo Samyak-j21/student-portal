@@ -16,6 +16,8 @@ router.post('/register', async (req, res) => {
         user = new User({
             email: req.body.email,
             password: req.body.password,
+            // Assuming your frontend sends this value, or it defaults to false
+            isAdmin: req.body.isAdmin || false
         });
 
         const salt = await bcrypt.genSalt(10);
@@ -24,7 +26,8 @@ router.post('/register', async (req, res) => {
 
         const payload = {
             user: {
-                id: user.id
+                id: user.id,
+                isAdmin: user.isAdmin
             },
         };
 
@@ -34,7 +37,7 @@ router.post('/register', async (req, res) => {
             { expiresIn: '1h' },
             (err, token) => {
                 if (err) throw err;
-                res.json({ token, user: { email: user.email } });
+                res.json({ token, user: { email: user.email, isAdmin: user.isAdmin } });
             }
         );
 
