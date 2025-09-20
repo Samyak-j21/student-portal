@@ -10,6 +10,14 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
+// Configure CORS to accept requests from your frontend's URL
+// This is the crucial fix for the "Failed to fetch" error
+app.use(cors({
+    origin: 'https://student-portal-zeta-ashen.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'x-auth-token']
+}));
+
 // Connect to MongoDB
 const connectDB = async () => {
     try {
@@ -23,7 +31,6 @@ const connectDB = async () => {
 connectDB();
 
 // Essential Middleware - Order is critical!
-app.use(cors());
 app.use(express.json());
 
 // Define all API Routes first
