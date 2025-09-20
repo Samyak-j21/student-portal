@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/files', {
+      const response = await fetch('https://student-portal-uztl.onrender.com/api/files', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (token) {
           headers['x-auth-token'] = token;
         }
-        const response = await fetch('http://localhost:5000/api/chat', {
+        const response = await fetch('https://student-portal-uztl.onrender.com/api/chat', {
           method: 'POST',
           headers: headers,
           body: JSON.stringify({ message: userMessage }),
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (token) {
         headers['x-auth-token'] = token;
       }
-      const response = await fetch('http://localhost:5000/api/pdf/summarize', {
+      const response = await fetch('https://student-portal-uztl.onrender.com/api/pdf/summarize', {
         method: 'POST',
         headers: headers,
         body: formData,
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (progressBarContainer) progressBarContainer.style.display = 'none';
     };
 
-    xhr.open('POST', 'http://localhost:5000/api/upload');
+    xhr.open('POST', 'https://student-portal-uztl.onrender.com/api/upload');
     xhr.setRequestHeader('x-auth-token', token);
     xhr.send(formData);
   });
