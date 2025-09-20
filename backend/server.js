@@ -8,22 +8,12 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// --- CORS Setup ---
-// Keep your existing origin, but also handle preflight OPTIONS requests
-const corsOptions = {
+// This is the correct CORS configuration for your app
+app.use(cors({
     origin: 'https://student-portal-zeta-ashen.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'x-auth-token']
-};
-
-// Apply CORS before all routes
-app.use(cors(corsOptions));
-
-// Handle preflight requests explicitly
-app.options('*', cors(corsOptions));
-
-// Essential Middleware
-app.use(express.json());
+}));
 
 // Connect to MongoDB
 const connectDB = async () => {
@@ -37,6 +27,9 @@ const connectDB = async () => {
 };
 connectDB();
 
+// Essential Middleware
+app.use(express.json());
+
 // Define all API Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/chat', require('./routes/chat'));
@@ -47,7 +40,6 @@ app.use('/api/files', require('./routes/files'));
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, '..', 'frontend')));
 
-// Start server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
