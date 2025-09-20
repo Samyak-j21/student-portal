@@ -10,8 +10,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Configure CORS to accept requests from your frontend's URL
-// This is the crucial fix for the "Failed to fetch" error
+// This is the correct CORS configuration for your app
 app.use(cors({
     origin: 'https://student-portal-zeta-ashen.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -30,10 +29,10 @@ const connectDB = async () => {
 };
 connectDB();
 
-// Essential Middleware - Order is critical!
+// Essential Middleware
 app.use(express.json());
 
-// Define all API Routes first
+// Define all API Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/chat', require('./routes/chat'));
 app.use('/api/pdf', require('./routes/pdf'));
