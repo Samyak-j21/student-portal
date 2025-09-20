@@ -10,29 +10,14 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// CORS configuration
-const allowedOrigins = [
-    "http://localhost:3000",
-    "https://student-portal-zeta-ashen.vercel.app"
-];
-
+// Configure CORS
 app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "x-auth-token"],
-    credentials: true
+    origin: 'https://student-portal-zeta-ashen.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'x-auth-token']
 }));
 
-// Handle preflight requests
-app.options("*", cors());
-
-// Middleware
+// Essential Middleware - Order is critical!
 app.use(express.json());
 
 // Connect to MongoDB
@@ -47,7 +32,7 @@ const connectDB = async () => {
 };
 connectDB();
 
-// Routes
+// Define all API Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/chat', require('./routes/chat'));
 app.use('/api/pdf', require('./routes/pdf'));
