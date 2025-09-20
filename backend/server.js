@@ -10,12 +10,15 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// This is the correct CORS configuration for your app
+// This single middleware correctly handles all CORS issues
 app.use(cors({
     origin: 'https://student-portal-zeta-ashen.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'x-auth-token']
 }));
+
+// Essential Middleware - Order is critical!
+app.use(express.json());
 
 // Connect to MongoDB
 const connectDB = async () => {
@@ -28,9 +31,6 @@ const connectDB = async () => {
     }
 };
 connectDB();
-
-// Essential Middleware
-app.use(express.json());
 
 // Define all API Routes
 app.use('/api/auth', require('./routes/auth'));
