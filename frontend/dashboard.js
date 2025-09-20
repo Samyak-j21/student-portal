@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- DOM Elements ---
   const userEmailSpan = document.getElementById('user-email');
   const displayUserId = document.getElementById('displayUserId');
   const adminUploadSection = document.getElementById('adminSection');
@@ -138,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } catch (error) {
       console.error('Error fetching files:', error);
-      availableFilesList.innerHTML = `<p class="text-red-500">Failed to load files. Error: ${error.message}</p>`;
+      if (availableFilesList) availableFilesList.innerHTML = `<p class="text-red-500">Failed to load files. Error: ${error.message}</p>`;
       showMessage(`Failed to load files: ${error.message}`);
     }
   }
@@ -222,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (token) {
           headers['x-auth-token'] = token;
         }
-        const response = await fetch('https://student-portal-uzt1.onrender.com/api/chat', {
+        const response = await fetch('https://student-portal-uzd1.onrender.com/api/chat', {
           method: 'POST',
           headers: headers,
           body: JSON.stringify({ message: userMessage }),
@@ -254,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (token) {
         headers['x-auth-token'] = token;
       }
-      const response = await fetch('https://student-portal-uzt1.onrender.com/api/pdf/summarize', {
+      const response = await fetch('https://student-portal-uzd1.onrender.com/api/pdf/summarize', {
         method: 'POST',
         headers: headers,
         body: formData,
@@ -335,7 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (progressBarContainer) progressBarContainer.style.display = 'none';
     };
 
-    xhr.open('POST', 'https://student-portal-uzt1.onrender.com/api/upload');
+    xhr.open('POST', 'https://student-portal-uzd1.onrender.com/api/upload');
     xhr.setRequestHeader('x-auth-token', token);
     xhr.send(formData);
   });
