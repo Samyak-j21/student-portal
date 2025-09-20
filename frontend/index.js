@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('signup-password').value;
         showAuthMessage('Attempting to sign up...', 'default');
         try {
-            const response = await fetch('https://student-portal-uzd1.onrender.com', {
+            const response = await fetch('https://student-portal-uzd1.onrender.com/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password }),
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('login-password').value;
         showAuthMessage('Attempting to log in...', 'default');
         try {
-            const response = await fetch('https://student-portal-uzd1.onrender.com', {
+            const response = await fetch('https://student-portal-uzd1.onrender.com/api/auth/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password }),
