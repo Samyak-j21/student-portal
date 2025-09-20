@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Correct CORS configuration - simple and effective
+// This is the correct CORS configuration for your app
 app.use(cors({
     origin: 'https://student-portal-zeta-ashen.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
