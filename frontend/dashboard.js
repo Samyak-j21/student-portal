@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const navChatbot = document.getElementById('navChatbot');
   const navSummarizer = document.getElementById('navSummarizer');
   const navAdmin = document.getElementById('navAdmin');
-  const adminNavListItem = document.getElementById('adminNavListItem'); // New: List item for admin nav
+  const adminNavListItem = document.getElementById('adminNavListItem');
   const logoutNav = document.getElementById('logout-nav');
 
   // Section elements
@@ -49,61 +49,49 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeMessageBtn = document.getElementById('closeMessage');
 
   // --- Helper Functions ---
-
-  // Function to display custom message box
   function showMessage(message) {
     messageText.textContent = message;
     messageBox.classList.remove('hidden');
   }
 
-  // Function to hide custom message box
   function hideMessage() {
     messageBox.classList.add('hidden');
   }
 
-  // Event listener for closing the custom message box
   if (closeMessageBtn) closeMessageBtn.addEventListener('click', hideMessage);
 
   function showAuthMessage(message, type) {
-    // This function is primarily for the index.html login/signup messages.
-    // On dashboard, we use the custom messageBox.
     console.log(`Auth Message (Dashboard): ${message} (${type})`);
-    showMessage(message); // Use the custom message box for consistency
+    showMessage(message);
   }
 
-  // Function to show a specific content section and hide others
   function showSection(sectionElement, title) {
-    // Hide all content sections
     document.querySelectorAll('.content-section').forEach(section => {
       section.style.display = 'none';
       section.classList.remove('active');
     });
 
-    // Show the selected section
     sectionElement.style.display = 'block';
     sectionElement.classList.add('active');
-    pageTitle.textContent = title; // Update the main header title
+    pageTitle.textContent = title;
 
-    // Update active class for sidebar navigation links
     document.querySelectorAll('.nav-item').forEach(navItem => {
       navItem.classList.remove('active');
     });
-    // Add active class to the clicked navigation link
     if (sectionElement === downloadsSection) navDownloads.classList.add('active');
     else if (sectionElement === chatbotSection) navChatbot.classList.add('active');
     else if (sectionElement === summarizerSection) navSummarizer.classList.add('active');
     else if (sectionElement === adminSection) navAdmin.classList.add('active');
   }
 
-  // Function to fetch and display files (now with search capability)
   async function fetchAndDisplayFiles(searchTerm = '') {
     if (!availableFilesList) return;
     availableFilesList.innerHTML = '<p class="text-center text-gray-500">Loading files...</p>';
-    noDownloadsMessage.style.display = 'none'; // Hide no results message initially
+    noDownloadsMessage.style.display = 'none';
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('https://student-portal-uzt1.onrender.com/api/files', {
+      const response = await fetch('https://student-portal-uzd1.onrender.com/api/files', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -117,20 +105,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       let files = await response.json();
-
-      // Filter files based on search term
       if (searchTerm) {
         const lowerCaseSearchTerm = searchTerm.toLowerCase();
         files = files.filter(file =>
           file.fileName.toLowerCase().includes(lowerCaseSearchTerm) ||
           (file.title && file.title.toLowerCase().includes(lowerCaseSearchTerm)) ||
           (file.category && file.category.toLowerCase().includes(lowerCaseSearchTerm)) ||
-          (file.uploadDate && new Date(file.uploadDate).toLocaleDateString().toLowerCase().includes(lowerCaseSearchTerm)) // Search by formatted date
+          (file.uploadDate && new Date(file.uploadDate).toLocaleDateString().toLowerCase().includes(lowerCaseSearchTerm))
         );
       }
 
-      availableFilesList.innerHTML = ''; // Clear existing list
-
+      availableFilesList.innerHTML = '';
       if (files.length === 0) {
         noDownloadsMessage.style.display = 'block';
       } else {
@@ -158,38 +143,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Function to check authentication and setup UI
   function checkAuthAndSetupUI() {
     const token = localStorage.getItem('token');
     const isAdmin = localStorage.getItem('isAdmin') === 'true';
     const userEmail = localStorage.getItem('userEmail');
 
     if (token) {
-      // Update user email and ID display
       if (userEmailSpan) userEmailSpan.textContent = userEmail;
       if (displayUserId) displayUserId.textContent = userEmail;
 
-      // Control visibility of admin nav item
       if (adminNavListItem) {
-        adminNavListItem.style.display = isAdmin ? 'list-item' : 'none'; // Show/hide the entire list item
+        adminNavListItem.style.display = isAdmin ? 'list-item' : 'none';
       }
 
-      // Initial load of files for the downloads section
       fetchAndDisplayFiles();
-      showSection(downloadsSection, 'Downloads'); // Default to downloads section
+      showSection(downloadsSection, 'Downloads');
     } else {
-      // Redirect to index page if not logged in
       window.location.href = 'index.html';
     }
   }
 
-  // --- Event Listeners ---
-
-  // Sidebar Navigation
   if (navDownloads) navDownloads.addEventListener('click', (e) => {
     e.preventDefault();
     showSection(downloadsSection, 'Downloads');
-    fetchAndDisplayFiles(); // Refresh files when navigating to downloads
+    fetchAndDisplayFiles();
   });
 
   if (navChatbot) navChatbot.addEventListener('click', (e) => {
@@ -206,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     const isAdmin = localStorage.getItem('isAdmin') === 'true';
     if (isAdmin) {
-      showSection(adminSection, 'Admin Section'); // Changed title here
+      showSection(adminSection, 'Admin Section');
     } else {
       showMessage("You do not have administrative privileges to access this section.");
     }
@@ -223,7 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
   });
 
-  // Chatbot Functionality
   if (sendChatButton) sendChatButton.addEventListener('click', async () => {
     const userMessage = chatInput.value.trim();
     if (userMessage !== '') {
@@ -263,7 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // PDF Summarizer Functionality
   if (summarizePdfButton) summarizePdfButton.addEventListener('click', async () => {
     if (!pdfFileInput.files.length) {
       showMessage('Please select a PDF file to summarize.');
@@ -300,7 +275,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Admin Upload Event Listener with Progress Bar
   if (adminUploadButton) adminUploadButton.addEventListener('click', () => {
     if (!adminPdfFile.files.length) {
       showMessage('Please select a PDF file to upload.');

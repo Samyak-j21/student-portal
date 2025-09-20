@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('login-password').value;
         showAuthMessage('Attempting to log in...', 'default');
         try {
-            const response = await fetch('https://student-portal-uzd1.onrender.com/api/auth/signup', {
+            const response = await fetch('https://student-portal-uzd1.onrender.com/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password }),
