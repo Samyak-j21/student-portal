@@ -11,7 +11,6 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // Configure CORS to accept requests from your frontend's URL
-// This is the crucial fix for the "Failed to fetch" error
 app.use(cors({
     origin: 'https://student-portal-zeta-ashen.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
