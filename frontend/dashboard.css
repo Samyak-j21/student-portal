@@ -284,6 +284,9 @@ body.dashboard-body {
   padding: 8px 12px;
   border-radius: 8px;
   max-width: 80%;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.5;
 }
 
 .bot-message {

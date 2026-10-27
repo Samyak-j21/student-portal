@@ -199,9 +199,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
   });
 
+  if (chatInput && sendChatButton) {
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        sendChatButton.click();
+      }
+    });
+  }
+
   if (sendChatButton) sendChatButton.addEventListener('click', async () => {
     const userMessage = chatInput.value.trim();
     if (userMessage !== '') {
+      sendChatButton.disabled = true;
       const userMessageElement = document.createElement('p');
       userMessageElement.className = 'user-message';
       userMessageElement.innerHTML = `<strong>You:</strong> ${userMessage}`;
@@ -228,12 +238,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         const data = await response.json();
 
-        botThinkingMessage.innerHTML = `<strong>Bot:</strong> ${data.response}`;
+        const botReply = data.response || data.error || 'No response received from the bot.';
+        botThinkingMessage.innerHTML = `<strong>Bot:</strong> ${botReply}`;
         chatWindow.scrollTop = chatWindow.scrollHeight;
       } catch (error) {
         console.error('Error sending chat message:', error);
         botThinkingMessage.innerHTML = `<strong>Bot:</strong> An error occurred while fetching response.`;
         showMessage('An error occurred with the chatbot. Please try again.');
+      } finally {
+        sendChatButton.disabled = false;
+        chatInput.focus();
       }
     }
   });
